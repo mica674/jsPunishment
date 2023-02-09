@@ -8,8 +8,6 @@ const section = document.querySelector('section');
 const membersSelect = document.querySelector('.membersSelect');
 const btnSection = document.querySelectorAll('button');
 const scrollFirstname = document.querySelector('.scrollFirstname');
-// Sélection de tous les input qui sont dans un fieldset
-const caseCheck = document.querySelectorAll('fieldset input');
 // Sélection de tous les labels
 const labels = document.querySelectorAll('label');
 const btnAside = document.getElementById('checkTouch');
@@ -17,20 +15,25 @@ const btnAside = document.getElementById('checkTouch');
 const checkboxList = document.querySelector('.checkboxList')
 
 // LOCAL STORAGE
-let members = localStorage.getItem("members");
-members = JSON.parse(members);
-
+let membersPARSE = localStorage.getItem("members");
+members = JSON.parse(membersPARSE);
+if ((members != []) && (members != null) && (members != '')) { //Si members est pas vide
+    section.classList.remove('d-none');
+    membersSelect.innerHTML = members;
+}
+else { section.classList.add('d-none'); }
 // Fonctions
 // Fonction pour afficher un prénom aléatoire jusqu'au stop
 function scrollMembers() {
     scrollFirstname.innerHTML = randomFirstname(members);
-    console.log( scrollFirstname.innerHTML);
+    // console.log(scrollFirstname.innerHTML);
 }
 
 // Fonction qui retourne un prénom aléatoire du tableau members
 function randomFirstname(members) {
-    let randomNumber = Math.floor(Math.random()*members.length);
+    let randomNumber = Math.floor(Math.random() * members.length);
     let firstname = members[randomNumber];
+    console.log(members);
     return firstname;
 }
 
@@ -49,10 +52,12 @@ function nextLabel(inputCurrent) {
 // Instructions
 // Créations des checkbox avec les prénoms du tableau de prénoms
 let i = 1;
-firstnames.forEach(firstname => {
-    let checked = 'unchecked';
-    if (members.includes(firstname)) {
-        checked = 'checked';
+firstnames.forEach((firstname) => {
+    let checked = '';
+    if (members != [] && members != null) { //Si members est pas vide
+        if (members.includes(firstname)) { //Test si le prénom en cours est présent dans le local storage (members)
+            checked = 'checked';
+        }
     }
     checkboxList.innerHTML += `
         <li class="mx-3">
@@ -62,7 +67,7 @@ firstnames.forEach(firstname => {
     `;
     i++;
 });
-
+// Ciblage des checkbox qui viennent d'être créées
 const checkboxTable = document.querySelectorAll('.checkbox');
 
 // Ecouteur d'événement à chaque changement d'état d'une checkbox
@@ -71,70 +76,37 @@ checkboxTable.forEach(e => {
         // Vidange du contenu du tableau 'members'
         members = [];
         // Controle de chaque input
-        console.log(caseCheck);
-        caseCheck.forEach(caseBox => {
+        checkboxTable.forEach(checkbox => {
             // Si la checkbox est coché
-            if (caseBox.checked == true) {
+            if (checkbox.checked == true) {
                 // Ajouter le prénom au tableau 'members'
-                members.push(nextLabel(caseBox));
-        }
-    });
-    console.table(members);
-    // Affectation des valeurs du tableau dans le paragraphe 'membersSelect'
-    membersSelect.innerHTML = members;
+                members.push(nextLabel(checkbox));
+            }
+        });
+        // Affectation des valeurs du tableau dans le paragraphe 'membersSelect'
+        membersSelect.innerHTML = members;
 
-    // Le tableau members ne doit pas être vide 
-    // pour que la partie aléatoire apparaisse
-    if (members != '') {
-    section.classList.remove('d-none');
-    members = JSON.stringify(members);
-    localStorage.setItem('members', members);
-    }else {section.classList.add('d-none');}
-
+        // Le tableau members ne doit pas être vide 
+        // pour que la partie aléatoire apparaisse
+        if ((members != []) && (members != null) && (members != '')) { //Si members est pas vide
+            section.classList.remove('d-none');
+        } else { section.classList.add('d-none'); }
+        
+        // Mise en local storage du tableau members contenant les membres cochés
+        membersSTR = JSON.stringify(members);
+        localStorage.setItem('members', membersSTR);
     })
 });
 
-// // Ecouteur d'événement au clique sur le bouton sélectionner
-// btnAside.addEventListener('click',()=>{
-//     // Vidange du contenu du tableau 'members'
-//     members = [];
-//     // Controle de chaque input
-//     caseCheck.forEach(caseBox => {
-//         // Si la checkbox est coché
-//         if (caseBox.checked == true) {
-//             // Ajouter le prénom au tableau 'members'
-//             members.push(nextLabel(caseBox));
-//         }
-//     });
-//     console.table(members);
-//     // Affectation des valeurs du tableau dans le paragraphe 'membersSelect'
-//     membersSelect.innerHTML = members;
-
-//     // Le tableau members ne doit pas être vide 
-//     // pour que la partie aléatoire apparaisse
-//     if (members != '') {
-//     section.classList.remove('d-none');
-//     }else {section.classList.add('d-none');}
-
-// });
-
-// Lancement 
-btnSection.forEach((button)=>{
-    button.addEventListener('click',()=>{
-        if (button.value == 'go') {
-            startInterval();
-            setTimeout(()=>{
+// Lancement bouton 'GO'
+btnSection.forEach((button) => { //Boucle sur tous les 'button'
+    button.addEventListener('click', () => { //Ecouteur d'événement au clic
+        if (button.value == 'go') { //Si le bouton en cours a pour value 'go'
+            startInterval(); //Appel de la fonction startInterval();
+            setTimeout(() => { //
                 clearInterval(interval1);
-            }, 3000)} 
-        if (button.value == 'stop') {
-            clearInterval(interval1);
+            }, 3000)
         }
         button.classList.add('disabled')
-    })
-})
-
-caseCheck.forEach((element,index)=>{
-    element.addEventListener('click', ()=>{
-        element[index].classList.toggle('text-decoration-line-through');
     })
 })
