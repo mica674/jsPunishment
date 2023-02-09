@@ -1,0 +1,30 @@
+li{
+    list-style-type: none;
+}
+
+html{
+    background: url("../img/Photo_DWWM_PRF_P5.jpg") no-repeat;
+    background-position: 0 -200px;
+    background-size: cover;
+}
+
+body{
+    background-color:black;
+    opacity: 0.8;
+    color: white;
+    height: 100vh;
+}
+
+.small{
+    font-size: 0.5rem;
+}
+
+li{
+    border: 1px solid white;
+    border-radius: 10%;
+    background-color: #242424;
+}
+
+#btnGo:hover{
+    width: 60px;
+}
