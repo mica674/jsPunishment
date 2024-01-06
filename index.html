@@ -17,34 +17,64 @@
 <header>
     <div class="rainbow-text animated" data-splitting>
         <h1 class="text-center">Roue de la chance<small class="small">ou pas...</small></h1>
-        <h2 class="text-center text-danger"> ATTENTION FRONT TR&Egrave;S AVANC&Eacute;</h2>
+        <!-- <h2 class="text-center text-danger"> ATTENTION FRONT TR&Egrave;S PUISSANT !</h2> -->
     </div> 
 </header>
 
     <!-- SECTION -->
-<section class="d-none">
+<section class="">
     <p class="membersSelect text-center"></p>
 
-    <div class="d-flex flex-row justify-content-center">
-        <button id="btnGo" value="go">GO</button>
-        <div>
-            <h2 class="scrollFirstname"></h2>
+    <div class="my-3">
+        <div class="row p-0 m-0 membersSelectedSection align-items-center">
+            <div class="col-6 ms-5 text-center h-50">
+                <button id="btnGo" class="rounded" value="go">GO</button>
+            </div>
+            <div class="col-5 ms-3 my-auto">
+                <h2 class="scrollFirstname overflow-hidden text-center my-auto"></h2>
+            </div>
         </div>
         <!-- <button value="stop">STOP</button> -->
     </div>
 </section>
 
-    <!-- SELECTION PARTICIPANTS -->
-<aside>
-    <h2>Sélectionner/déselectionner les participants</h2>
-    <fieldset>
-        <ul class="d-flex flex-column align-items-start checkboxList">
-        </ul>
-    </fieldset>
-</aside>
+<div class="Container row m-0">
+
+    <div class="leftContainer col-md-6 col-12">
+        <!-- SELECTION PARTICIPANTS -->
+        <aside class="d-flex flex-column">
+            <h2 class="text-center mb-4">Participants</h2>
+            <fieldset>
+                <ul class="d-flex flex-column align-items-center checkboxList">
+                </ul>
+            </fieldset>
+        </aside>
+        
+        <!-- Boutons tout sélectionner/désélectionner -->
+        <section>
+            <div class="text-center my-5">
+                <button id="btnSelectAll" class="rounded" value="selectAll">Tout sélectionner</button>
+                <button id="btnUnselectAll" class="rounded" value="unselectAll">Tout désélectionner</button>
+                <button id="test">
+                    <img src="./public/assets/img/deleteImage.jpg" class="deleteImage" alt="Suppression">
+                </button>
+            </div>
+        </section>
+        
+        <form autocomplete="off" class="text-center my-5" method="dialog">
+            <label for="firstname" hidden>Prénom</label>
+            <input class="rounded" type="text" name="firstname" id="firstname" placeholder="Prénom">
+            <input type="submit" value="Ajouter" id="submitButton" class="rounded">
+        </form>
+
+    </div>
+    <div class="rightContainer col-md-6  text-center d-md-block d-none mt-5">
+        <img src="./public/assets/img/Isagri.jpg" class="img-fluid" alt="">
+    </div>
+</div>
+
+<!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="public/assets/js/script.js"></script>
 </body>
-
-
 </html>

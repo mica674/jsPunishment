@@ -3,28 +3,48 @@ li{
 }
 
 html{
-    background: url("../img/Photo_DWWM_PRF_P5.jpg") no-repeat;
+    background: url("../img/Isagri.jpg") no-repeat fixed;
     background-position: 0 -200px;
     background-size: cover;
+    width: 100vw;
 }
 
 body{
     background-color:black;
     opacity: 0.8;
     color: white;
-    height: 100vh;
+    height: 100%;
 }
 
 .small{
     font-size: 0.5rem;
 }
 
-li{
+li, #btnSelectAll, #btnUnselectAll, #submitButton, #btnGo{
     border: 1px solid white;
-    border-radius: 10%;
     background-color: #242424;
+    margin: 0.3rem;
+    color: white;
+}
+ul{
+    padding: 0;
 }
 
-#btnGo:hover{
-    width: 60px;
+#btnGo{
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 4rem;
+    margin: 2rem 0;
+}
+
+#btnGo.disabled{
+    background-color: gray;
+}
+
+.deleteImage{
+    height: 1rem;
+}
+
+.membersSelectedSection{
+    height: 200px;
 }
